@@ -7,6 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+print("sanidp Gupta")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # later we restrict
