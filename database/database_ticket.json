@@ -1,0 +1,60 @@
+[
+    {
+        "ticket_id": "TICK-101",
+        "title": "System Login Issue",
+        "description": "Unable to login into the internal portal since morning.",
+        "status": "Open",
+        "priority": "High",
+        "created_by": "CUST-1001",
+        "assigned_to": "AGT-2001",
+        "date": "2026-01-28"
+    },
+    {
+        "ticket_id": "TICK-102",
+        "title": "Printer Not Working",
+        "description": "The HR department printer is not responding.",
+        "status": "In Progress",
+        "priority": "Medium",
+        "created_by": "CUST-1002",
+        "assigned_to": "AGT-2002",
+        "date": "2026-01-27"
+    },
+    {
+        "ticket_id": "TICK-103",
+        "title": "Email Access Problem",
+        "description": "Emails are not syncing on mobile device.",
+        "status": "Resolved",
+        "priority": "Low",
+        "created_by": "CUST-1003",
+        "assigned_to": "AGT-2003",
+        "date": "2026-01-25"
+    },
+    {
+        "ticket_id": "TICK004",
+        "title": "my laptop is not openeing",
+        "description": "its screen is blinking continuesly",
+        "priority": "High",
+        "status": "Open",
+        "assigned_to": "Not Assigned",
+        "date": "30-01-2026"
+    },
+    {
+        "ticket_id": "TICK005",
+        "title": "laptop is get switched off ",
+        "description": "it nothing show anything on the screen",
+        "priority": "Low",
+        "status": "Open",
+        "assigned_to": "Not Assigned",
+        "date": "30-01-2026"
+    },
+    {
+        "ticket_id": "TICK006",
+        "title": "my keyboard in not working ",
+        "description": "nothing is getting typed on the screen",
+        "priority": "High",
+        "status": "Open",
+        "created_by": "CUST-1005",
+        "assigned_to": "Not Assigned",
+        "date": "30-01-2026"
+    }
+]

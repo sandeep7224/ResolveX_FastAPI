@@ -1,0 +1,72 @@
+[
+    {
+        "id": "CUST-1001",
+        "name": "Rahul Sharma",
+        "department": "IT",
+        "email": "rahul@gmail.com",
+        "password": "rahul123"
+    },
+    {
+        "id": "CUST-1002",
+        "name": "Priya Verma",
+        "department": "HR",
+        "email": "priya@gmail.com",
+        "password": "priya123"
+    },
+    {
+        "id": "CUST-1003",
+        "name": "Amit Singh",
+        "department": "Finance",
+        "email": "amit@gmail.com",
+        "password": "amit123"
+    },
+    {
+        "id": "CUST-1004",
+        "name": "string",
+        "department": "string",
+        "email": "user@example.com",
+        "password": "string"
+    },
+    {
+        "id": "CUST-1005",
+        "name": "sandip",
+        "department": "string",
+        "email": "sandip@example.com",
+        "password": "string"
+    },
+    {
+        "id": "CUST-1006",
+        "name": "fasd",
+        "department": "it",
+        "email": "itys@gmail.com",
+        "password": "52345kg"
+    },
+    {
+        "id": "CUST-1007",
+        "name": "gsddfg",
+        "department": "dfg",
+        "email": "sdfg@gmail.com",
+        "password": "fgsdg345"
+    },
+    {
+        "id": "CUST-1008",
+        "name": "fgd",
+        "department": "sdfg",
+        "email": "fgsd@gmail.com",
+        "password": "rtgs"
+    },
+    {
+        "id": "CUST-1009",
+        "name": "ghdfdgd",
+        "department": "sdfg",
+        "email": "dfg@gmail.com",
+        "password": "45325"
+    },
+    {
+        "id": "CUST-1010",
+        "name": "ashish",
+        "department": "it",
+        "email": "ashish@gmail.com",
+        "password": "sdfgsdf643"
+    }
+]

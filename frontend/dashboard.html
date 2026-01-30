@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResolveX - Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+
+        .top-buttons button {
+            margin-left: 15px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .create-btn { background: #38bdf8; color: black; }
+        .my-btn {
+            background: transparent;
+            border: 1px solid #38bdf8;
+            color: #38bdf8;
+        }
+
+        .top-buttons button:hover { transform: scale(1.05); }
+
+        .page-title {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 28px;
+            color: #38bdf8;
+        }
+
+        .container {
+            padding: 50px 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .ticket-card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .ticket-card:hover {
+            transform: translateY(-8px);
+            background: #334155;
+        }
+
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .ticket-title { font-size: 18px; font-weight: bold; }
+
+        .status {
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        .Open { background: #ef4444; }
+        .InProgress { background: #f59e0b; }
+        .Resolved { background: #22c55e; }
+
+        .ticket-desc {
+            font-size: 14px;
+            margin: 10px 0;
+            opacity: 0.85;
+        }
+
+        .ticket-footer {
+            font-size: 12px;
+            opacity: 0.75;
+            margin-top: 10px;
+            border-top: 1px solid #334155;
+            padding-top: 8px;
+        }
+
+        .priority { font-weight: bold; }
+        .High { color: #ef4444; }
+        .Medium { color: #f59e0b; }
+        .Low { color: #22c55e; }
+
+        /* 🔥 MODAL STYLES */
+        .modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .modal-content input,
+        .modal-content textarea,
+        .modal-content select {
+            width: 100%;
+            margin-bottom: 12px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .modal-content button {
+            width: 100%;
+            padding: 10px;
+            background: #38bdf8;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .close {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .hidden { display: none; }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">ResolveX</div>
+    <div class="top-buttons">
+        <button class="create-btn" onclick="openTicketForm()">+ Create Ticket</button>
+        <button class="my-btn">My Tickets</button>
+    </div>
+</header>
+
+<h2 class="page-title">Your Support Tickets</h2>
+
+<div class="container" id="ticketContainer"></div>
+
+<!-- 🎟️ CREATE TICKET MODAL -->
+<div id="ticketModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close" onclick="closeTicketForm()">&times;</span>
+    <h2>Create New Ticket</h2>
+
+    <form id="ticketForm">
+      <input type="text" id="title" placeholder="Issue Title" required>
+      <textarea id="description" placeholder="Describe your issue..." required></textarea>
+
+      <select id="priority" required>
+        <option value="">Select Priority</option>
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+      </select>
+
+      <button type="submit">Submit Ticket</button>
+    </form>
+  </div>
+</div>
+
+<script>
+function openTicketForm() {
+    document.getElementById("ticketModal").classList.remove("hidden");
+}
+
+function closeTicketForm() {
+    document.getElementById("ticketModal").classList.add("hidden");
+}
+
+document.getElementById("ticketForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const data = {
+        title: document.getElementById("title").value,
+        description: document.getElementById("description").value,
+        priority: document.getElementById("priority").value,
+        created_by: localStorage.getItem("user_id"),
+        assigned_to: "Not Assigned",
+        date: new Date().toLocaleDateString()
+    };
+
+    try {
+        const res = await fetch("http://127.0.0.1:8000/create-ticket", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+
+        if (!res.ok) {
+            alert(result.detail);
+        } else {
+            alert("Ticket Created");
+            closeTicketForm();
+            document.getElementById("ticketForm").reset();
+            loadTickets(); // 🔄 Refresh ticket list
+        }
+    } catch (err) {
+        alert("Server error");
+    }
+});
+
+async function loadTickets() {
+    const response = await fetch("http://127.0.0.1:8000/tickets");
+    const tickets = await response.json();
+
+    const container = document.getElementById("ticketContainer");
+    container.innerHTML = "";
+
+    tickets.forEach(ticket => {
+        let statusClass = ticket.status.replace(" ", "");
+        let priorityClass = ticket.priority;
+
+        const card = document.createElement("div");
+        card.className = "ticket-card";
+
+        card.innerHTML = `
+            <div class="ticket-header">
+                <div class="ticket-title">${ticket.title}</div>
+                <div class="status ${statusClass}">${ticket.status}</div>
+            </div>
+
+            <div class="ticket-desc">${ticket.description}</div>
+
+            <div class="ticket-footer">
+                <div class="priority ${priorityClass}">Priority: ${ticket.priority}</div>
+                Ticket ID: ${ticket.ticket_id} <br>
+                Created By: ${ticket.created_by} <br>
+                Assigned To: ${ticket.assigned_to} <br>
+                Date: ${ticket.date}
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+loadTickets();
+</script>
+
+</body>
+</html>
