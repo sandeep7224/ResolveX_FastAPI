@@ -17,9 +17,9 @@ app.add_middleware(
 )
 
 
-CUSTOMER_DB = r'C:\Users\Dell\Desktop\Ticket_management_system\database\database_customer.json'
-AGENT_DB = r'C:\Users\Dell\Desktop\Ticket_management_system\database\database_agent.json'
-TICKET_DB = r'C:\Users\Dell\Desktop\Ticket_management_system\database\database_ticket.json'
+CUSTOMER_DB = r'C:\Users\Dell\Desktop\Resolvex_FastAPI\database\database_customer.json'
+AGENT_DB = r'C:\Users\Dell\Desktop\Resolvex_FastAPI\database\database_agent.json'
+TICKET_DB = r'C:\Users\Dell\Desktop\Resolvex_FastAPI\database\database_ticket.json'
 
 
 # ------------------ Utility Functions ------------------
@@ -178,4 +178,12 @@ def create_ticket(ticket: Ticket):
     save_data(TICKET_DB, tickets)
 
     return {"message": "Ticket created"}
+
+
+@app.get("/tickets/agent/{agent_id}")
+def get_agent_tickets(agent_id: str):
+    tickets = load_data(TICKET_DB)
+    agent_tickets = [t for t in tickets if t["assigned_to"] == agent_id]
+    return agent_tickets
+
 
