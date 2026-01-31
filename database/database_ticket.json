@@ -16,7 +16,7 @@
         "status": "In Progress",
         "priority": "Medium",
         "created_by": "CUST-1002",
-        "assigned_to": "AGT-2002",
+        "assigned_to": "AGT-2001",
         "date": "2026-01-27"
     },
     {
@@ -56,5 +56,25 @@
         "created_by": "CUST-1005",
         "assigned_to": "Not Assigned",
         "date": "30-01-2026"
+    },
+    {
+        "ticket_id": "TICK007",
+        "title": "fsadgggggggggggg",
+        "description": "sddddddddddddddddddddd",
+        "priority": "Medium",
+        "status": "Open",
+        "created_by": "CUST-1004",
+        "assigned_to": "Not Assigned",
+        "date": "31-01-2026"
+    },
+    {
+        "ticket_id": "TICK008",
+        "title": "ddddddddddddddddddddddddddddddddddddd",
+        "description": "qaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "priority": "Medium",
+        "status": "Open",
+        "created_by": "CUST-1004",
+        "assigned_to": "Not Assigned",
+        "date": "31-01-2026"
     }
 ]

@@ -68,5 +68,19 @@
         "department": "it",
         "email": "ashish@gmail.com",
         "password": "sdfgsdf643"
+    },
+    {
+        "id": "CUST-1011",
+        "name": "stfsaring",
+        "department": "stradsfing",
+        "email": "usasdfer@example.com",
+        "password": "stadsfring"
+    },
+    {
+        "id": "CUST-1012",
+        "name": "asdfasss",
+        "department": "jhdfhgsdfg",
+        "email": "faadgsdfghdhdf@gmail.com",
+        "password": "agfsdfhdgjhsfhdfhg"
     }
 ]

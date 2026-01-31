@@ -168,101 +168,28 @@
 <header>
     <div class="logo">ResolveX</div>
     <div class="top-buttons">
-        <button class="create-btn" onclick="openTicketForm()">+ Create Ticket</button>
-        <button class="my-btn" onclick="showMyTickets()">My Tickets</button>
-        <button onclick="showAllTickets()">All Tickets</button>
+
 
     </div>
 </header>
 
-<h2 class="page-title">Your Support Tickets</h2>
+<h2 class="page-title">Assigned Support Tickets</h2>
+
 
 <div class="container" id="ticketContainer"></div>
 
-<!-- 🎟️ CREATE TICKET MODAL -->
-<div id="ticketModal" class="modal hidden">
-  <div class="modal-content">
-    <span class="close" onclick="closeTicketForm()">&times;</span>
-    <h2>Create New Ticket</h2>
-
-    <form id="ticketForm">
-      <input type="text" id="title" placeholder="Issue Title" required>
-      <textarea id="description" placeholder="Describe your issue..." required></textarea>
-
-      <select id="priority" required>
-        <option value="">Select Priority</option>
-        <option>Low</option>
-        <option>Medium</option>
-        <option>High</option>
-      </select>
-
-      <button type="submit">Submit Ticket</button>
-    </form>
-  </div>
-</div>
-
 <script>
-let allTickets = []; // store all tickets globally
+const agentId = localStorage.getItem("user_id");
 
-function openTicketForm() {
-    document.getElementById("ticketModal").classList.remove("hidden");
-}
-
-function closeTicketForm() {
-    document.getElementById("ticketModal").classList.add("hidden");
-}
-
-// 🎫 CREATE TICKET
-document.getElementById("ticketForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
-
-    const data = {
-        title: document.getElementById("title").value,
-        description: document.getElementById("description").value,
-        priority: document.getElementById("priority").value,
-        created_by: localStorage.getItem("user_id"),
-        assigned_to: "Not Assigned",
-        date: new Date().toLocaleDateString()
-    };
-
-    try {
-        const res = await fetch("http://127.0.0.1:8000/create-ticket", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        });
-
-        const result = await res.json();
-
-        if (!res.ok) {
-            alert(result.detail);
-        } else {
-            alert("Ticket Created");
-            closeTicketForm();
-            document.getElementById("ticketForm").reset();
-            loadTickets(); // 🔄 refresh tickets
-        }
-    } catch (err) {
-        alert("Server error");
-    }
-});
-
-// 📥 LOAD ALL TICKETS
-async function loadTickets() {
-    const response = await fetch("http://127.0.0.1:8000/tickets");
+async function loadAgentTickets() {
+    const response = await fetch(`http://127.0.0.1:8000/tickets/agent/${agentId}`);
     const tickets = await response.json();
 
-    allTickets = tickets; // save tickets for filtering
-    displayTickets(tickets); // show all by default
-}
-
-// 🖥 DISPLAY TICKETS
-function displayTickets(tickets) {
     const container = document.getElementById("ticketContainer");
     container.innerHTML = "";
 
     if (tickets.length === 0) {
-        container.innerHTML = "<p style='grid-column: 1/-1; text-align:center;'>No tickets found.</p>";
+        container.innerHTML = "<p>No tickets assigned to you.</p>";
         return;
     }
 
@@ -294,28 +221,10 @@ function displayTickets(tickets) {
     });
 }
 
-// 👤 SHOW ONLY LOGGED-IN USER TICKETS
-function showMyTickets() {
-    const userId = localStorage.getItem("user_id");
-
-    if (!userId) {
-        alert("User not logged in!");
-        return;
-    }
-
-    const myTickets = allTickets.filter(ticket => ticket.created_by === userId);
-    displayTickets(myTickets);
-}
-
-// 🌍 SHOW ALL TICKETS AGAIN
-function showAllTickets() {
-    displayTickets(allTickets);
-}
-
-// 🚀 INITIAL LOAD
-loadTickets();
+loadAgentTickets();
 </script>
 
 
-</body>
-</html>
+
+  </div>
+</div>
