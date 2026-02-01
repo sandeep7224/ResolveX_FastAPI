@@ -113,6 +113,7 @@
     <header>
         <div class="logo">ResolveX</div>
         <div class="nav-buttons">
+            <button onclick="goToAdmin()">Admin</button>
             <button class="login-btn" onclick="goToLogin()">Login</button>
             <button class="signup-btn" onclick="goToSignup()">Sign Up</button>
         </div>
@@ -160,6 +161,10 @@
 
     function goToSignup() {
          window.location.href = "signup_page.html";
+    }
+
+    function goToAdmin() {
+    window.location.href = "admin_dashboard.html";
     }
     
     </script>

@@ -1,11 +1,5 @@
 [
     {
-        "id": "AGT-2001",
-        "name": "Suresh Kumar",
-        "email": "suresh@gmail.com",
-        "password": "suresh123"
-    },
-    {
         "id": "AGT-2002",
         "name": "Neha Joshi",
         "email": "neha@gmail.com",
@@ -18,75 +12,15 @@
         "password": "vikram123"
     },
     {
-        "id": "AGT-2004",
-        "name": "string",
-        "email": "user@example.com",
-        "password": "string"
-    },
-    {
         "id": "AGT-2005",
         "name": "ritika",
         "email": "ritika@gmail.com",
         "password": "ritika123"
     },
     {
-        "id": "AGT-2006",
-        "name": "yug",
-        "email": "yug@gmail.com",
-        "password": "yug123"
-    },
-    {
-        "id": "AGT-2007",
-        "name": "sdg",
-        "email": "dfg@gmail.com",
-        "password": "123fga"
-    },
-    {
-        "id": "AGT-2008",
-        "name": "fasdf",
-        "email": "sadf@gmail.com",
-        "password": "dfgsdg2435234"
-    },
-    {
-        "id": "AGT-2009",
-        "name": "fas",
-        "email": "gdsf@gmail.com",
-        "password": "gfdsfg345"
-    },
-    {
         "id": "AGT-2010",
         "name": "adarsh",
         "email": "adarsh@example.com",
         "password": "ada123"
-    },
-    {
-        "id": "AGT-2011",
-        "name": "sourabh",
-        "email": "sourabh@gmail.com",
-        "password": "sourabh123"
-    },
-    {
-        "id": "AGT-2012",
-        "name": "gfsdfgs",
-        "email": "dsfg@gmail.com",
-        "password": "fgdsg67567"
-    },
-    {
-        "id": "AGT-2013",
-        "name": "sdfgdg",
-        "email": "gfhfgjh@gmail.com",
-        "password": "fgdsg435"
-    },
-    {
-        "id": "AGT-2014",
-        "name": "fgfdg",
-        "email": "jghjfhf@gmail.com",
-        "password": "fgdfsg"
-    },
-    {
-        "id": "AGT-2015",
-        "name": "wretw",
-        "email": "tyerw@gmail.com",
-        "password": "dfgsd632"
     }
 ]

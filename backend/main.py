@@ -77,6 +77,8 @@ class Ticket(BaseModel):
     created_by: str
 
 
+
+
 # ------------------ Signup Endpoints ------------------
 
 @app.post("/signup/customer")
@@ -186,4 +188,33 @@ def get_agent_tickets(agent_id: str):
     agent_tickets = [t for t in tickets if t["assigned_to"] == agent_id]
     return agent_tickets
 
+
+@app.get("/customers")
+def get_customers():
+    return load_data(CUSTOMER_DB)
+
+@app.get("/agents")
+def get_agents():
+    return load_data(AGENT_DB)
+
+@app.delete("/delete-customer/{email}")
+def delete_customer(email: str):
+    customers = load_data(CUSTOMER_DB)
+    customers = [c for c in customers if c["email"] != email]
+    save_data(CUSTOMER_DB, customers)
+    return {"message": "Customer deleted"}
+
+@app.delete("/delete-agent/{email}")
+def delete_agent(email: str):
+    agents = load_data(AGENT_DB)
+    agents = [a for a in agents if a["email"] != email]
+    save_data(AGENT_DB, agents)
+    return {"message": "Agent deleted"}
+
+@app.delete("/delete-ticket/{ticket_id}")
+def delete_ticket(ticket_id: str):
+    tickets = load_data(TICKET_DB)
+    tickets = [t for t in tickets if str(t["ticket_id"]) != str(ticket_id)]
+    save_data(TICKET_DB, tickets)
+    return {"message": "Ticket deleted"}
 

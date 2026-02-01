@@ -169,8 +169,6 @@
     <div class="logo">ResolveX</div>
     <div class="top-buttons">
         <button class="create-btn" onclick="openTicketForm()">+ Create Ticket</button>
-        <button class="my-btn" onclick="showMyTickets()">My Tickets</button>
-        <button onclick="showAllTickets()">All Tickets</button>
 
     </div>
 </header>
@@ -252,9 +250,45 @@ async function loadTickets() {
     const response = await fetch("http://127.0.0.1:8000/tickets");
     const tickets = await response.json();
 
-    allTickets = tickets; // save tickets for filtering
-    displayTickets(tickets); // show all by default
+    const loggedInUser = localStorage.getItem("user_id"); // saved at login
+    const container = document.getElementById("ticketContainer");
+    container.innerHTML = "";
+
+    // 🎯 Filter only tickets created by this customer
+    const myTickets = tickets.filter(ticket => ticket.created_by === loggedInUser);
+
+    if (myTickets.length === 0) {
+        container.innerHTML = "<p>No tickets created yet.</p>";
+        return;
+    }
+
+    myTickets.forEach(ticket => {
+        let statusClass = ticket.status.replace(" ", "");
+        let priorityClass = ticket.priority;
+
+        const card = document.createElement("div");
+        card.className = "ticket-card";
+
+        card.innerHTML = `
+            <div class="ticket-header">
+                <div class="ticket-title">${ticket.title}</div>
+                <div class="status ${statusClass}">${ticket.status}</div>
+            </div>
+
+            <div class="ticket-desc">${ticket.description}</div>
+
+            <div class="ticket-footer">
+                <div class="priority ${priorityClass}">Priority: ${ticket.priority}</div>
+                Ticket ID: ${ticket.ticket_id} <br>
+                Assigned To: ${ticket.assigned_to} <br>
+                Date: ${ticket.date}
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
 }
+
 
 // 🖥 DISPLAY TICKETS
 function displayTickets(tickets) {

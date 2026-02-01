@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResolveX - Admin Panel</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+        }
+
+        header {
+            padding: 20px 60px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+
+        h2 {
+            margin: 20px 60px 10px;
+            color: #38bdf8;
+        }
+
+        .section {
+            padding: 0 60px 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: #1e293b;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #334155;
+            text-align: left;
+        }
+
+        th {
+            background: #334155;
+            color: #38bdf8;
+        }
+
+        tr:hover {
+            background: #2d3b52;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>ResolveX Admin Dashboard</header>
+
+<!-- USERS -->
+<div class="section">
+    <h2>All Customers</h2>
+    <table id="customerTable">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Action</th>
+    </tr>
+</table>
+
+</div>
+
+<!-- AGENTS -->
+<div class="section">
+    <h2>All Agents</h2>
+    <table id="agentTable">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+</table>
+
+</div>
+
+<!-- TICKETS -->
+<div class="section">
+    <h2>All Tickets</h2>
+    <table id="ticketTable">
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Created By</th>
+        <th>Assigned To</th>
+        <th>Action</th>
+    </tr>
+</table>
+
+</div>
+
+<script>
+async function loadCustomers() {
+    const res = await fetch("http://127.0.0.1:8000/customers");
+    const data = await res.json();
+    const table = document.getElementById("customerTable");
+
+    table.innerHTML = `
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Action</th>
+        </tr>
+    `;
+
+    data.forEach(user => {
+        table.innerHTML += `
+            <tr>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.department}</td>
+                <td><button onclick="deleteCustomer('${user.email}')">❌</button></td>
+            </tr>
+        `;
+    });
+}
+
+
+async function loadAgents() {
+    const res = await fetch("http://127.0.0.1:8000/agents");
+    const data = await res.json();
+    const table = document.getElementById("agentTable");
+
+    table.innerHTML = `
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    `;
+
+    data.forEach(agent => {
+        table.innerHTML += `
+            <tr>
+                <td>${agent.name}</td>
+                <td>${agent.email}</td>
+                <td><button onclick="deleteAgent('${agent.email}')">❌</button></td>
+            </tr>
+        `;
+    });
+}
+
+
+async function loadTickets() {
+    const res = await fetch("http://127.0.0.1:8000/tickets");
+    const data = await res.json();
+    const table = document.getElementById("ticketTable");
+
+    table.innerHTML = `
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Created By</th>
+            <th>Assigned To</th>
+            <th>Action</th>
+        </tr>
+    `;
+
+    data.forEach(ticket => {
+        table.innerHTML += `
+            <tr>
+                <td>${ticket.ticket_id}</td>
+                <td>${ticket.title}</td>
+                <td>${ticket.status}</td>
+                <td>${ticket.priority}</td>
+                <td>${ticket.created_by}</td>
+                <td>${ticket.assigned_to}</td>
+                <td><button onclick="deleteTicket('${ticket.ticket_id}')">❌</button></td>
+            </tr>
+        `;
+    });
+}
+
+
+async function deleteCustomer(email) {
+    if (!confirm("Delete this customer?")) return;
+
+    await fetch(`http://127.0.0.1:8000/delete-customer/${email}`, { method: "DELETE" });
+    loadCustomers();
+}
+
+async function deleteAgent(email) {
+    if (!confirm("Delete this agent?")) return;
+
+    await fetch(`http://127.0.0.1:8000/delete-agent/${email}`, { method: "DELETE" });
+    loadAgents();
+}
+
+async function deleteTicket(ticketId) {
+    if (!confirm("Delete this ticket?")) return;
+
+    await fetch(`http://127.0.0.1:8000/delete-ticket/${ticketId}`, { method: "DELETE" });
+    loadTickets();
+}
+
+
+loadCustomers();
+loadAgents();
+loadTickets();
+</script>
+
+</body>
+</html>
