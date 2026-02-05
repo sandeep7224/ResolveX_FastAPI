@@ -1,12 +1,5 @@
 [
     {
-        "id": "CUST-1002",
-        "name": "Priya Verma",
-        "department": "HR",
-        "email": "priya@gmail.com",
-        "password": "priya123"
-    },
-    {
         "id": "CUST-1003",
         "name": "Amit Singh",
         "department": "Finance",

@@ -22,5 +22,23 @@
         "name": "adarsh",
         "email": "adarsh@example.com",
         "password": "ada123"
+    },
+    {
+        "id": "AGT-2011",
+        "name": "gupta",
+        "email": "gupta@gmail.com",
+        "password": "gupta123"
+    },
+    {
+        "id": "AGT-2012",
+        "name": "tgdfsgsfgsdfgdsfgdsfgdsfg",
+        "email": "sdfgsdfgs@gmail.com",
+        "password": "fgfggsdfgdfg"
+    },
+    {
+        "id": "AGT-2013",
+        "name": "fdghgdfgsadfg",
+        "email": "sdfgdfghs@gmail.com",
+        "password": "adsfsdgfdsag"
     }
 ]

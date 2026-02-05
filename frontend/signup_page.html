@@ -160,14 +160,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Make setRole available to buttons
     window.setRole = setRole;
 
     const form = document.getElementById("signupForm");
 
     form.addEventListener("submit", async function(e) {
-        console.log("Form submit triggered");
         e.preventDefault();
+        console.log("Form submit triggered");
 
         const name = document.getElementById("name").value;
         const department = document.getElementById("department").value;
@@ -192,12 +191,18 @@ document.addEventListener("DOMContentLoaded", function () {
             const result = await res.json();
 
             if (!res.ok) {
-                alert(result.detail);
+                alert(result.detail || "Signup failed");
             } else {
-                alert(result.message);
-                console.log("Redirecting now...");
-                window.location.href = "dashboard.html";
+                alert("Account created successfully! Please login.");
+
+                console.log("Redirecting to login page...");
+
+                // Redirect to login page after short delay
+                setTimeout(() => {
+                    window.location.href = "login_page.html";
+                }, 800);
             }
+
         } catch (error) {
             alert("Server error. Make sure FastAPI is running.");
             console.error(error);
@@ -206,6 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
+
 
 
 
