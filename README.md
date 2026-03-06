@@ -48,6 +48,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 For any questions or inquiries, please contact:
 - **Name**: Sandip
-- **Email**: your-email@example.com 
+- **Email**: sandeepgupta7224@gmail.com 
 
 Thank you for using ResolveX Ticket Management System!
